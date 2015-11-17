@@ -48,7 +48,7 @@ public class SquareTheCollider : MonoBehaviour
 
 	void Start () 
 	{
-		SquareIt ();
+		SquareItConnectos ();
 		squareMe.enabled = false;
 	}
 

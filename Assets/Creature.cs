@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TerrainPlacer : MonoBehaviour 
+public class Creature : MonoBehaviour 
 {
 	// Use this for initialization
 	void Start ()
