@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Creature : MonoBehaviour 
+public class Behavior : MonoBehaviour 
 {
+
+
 	// Use this for initialization
 	void Start ()
 	{
