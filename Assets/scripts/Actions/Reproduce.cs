@@ -21,9 +21,10 @@ public class Reproduce : CreatureAction
 	{
 		if (GetCreature ().GetHealth () >= 1f)
 		{
-			Object.Instantiate (GetCreature ().gameObject,
-			                   GetCreature ().transform.position + offspringPosition,
-			                   GetCreature ().transform.rotation);
+			GameObject offspring = Object.Instantiate (GetCreature ().gameObject,
+                                                       GetCreature ().transform.position + offspringPosition,
+			                                           GetCreature ().transform.rotation) as GameObject;
+
 			GetCreature().ChangeHealth(-successCost);
 		}
 		else

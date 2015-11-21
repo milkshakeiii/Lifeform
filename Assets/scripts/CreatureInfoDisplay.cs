@@ -8,7 +8,9 @@ public class CreatureInfoDisplay : MonoBehaviour
 	public GameObject healthBar;
 	public UnityEngine.UI.Text creatureName;
 
-	private static CreatureInfoDisplay singletonInstance;
+    public UnityEngine.UI.Text[] eventTexts;
+
+    private static CreatureInfoDisplay singletonInstance;
 	private Creature currentCreature;
 
 	public static CreatureInfoDisplay GetSingletonInstance ()
@@ -55,6 +57,15 @@ public class CreatureInfoDisplay : MonoBehaviour
 			TurnOn();
 			creatureName.text = currentCreature.GetName ();
 			healthBar.transform.localScale = new Vector3(currentCreature.GetHealth (), 1f, 1f);
+
+            foreach (UnityEngine.UI.Text text in eventTexts)
+            {
+                text.text = "--";
+            }
+            for(int i = 0; i < currentCreature.GetEvents().Count; i++)
+            {
+                eventTexts[i].text = currentCreature.GetEvents()[i].GetDebugString();
+            }
 		}
 	}
 }

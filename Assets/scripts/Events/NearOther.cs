@@ -1,17 +1,22 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
-public class NearedOther : CreatureEvent
+public class NearOther : CreatureEvent
 {
 	private float leftNearness;
 	private float rightNearness;
 	private float upNearness;
 	private float downNearness;
+    private float frequency;
+
+    private float occurences = 0f;
 
 	public void InitializeNearedOther(float newLeftNearness,
 	                                  float newRightNearness,
 	                                  float newUpNearness,
-	                                  float newDownNearness)
+	                                  float newDownNearness,
+                                      float newFrequency)
 	{
 		if (newDownNearness == 0f)
 			newDownNearness = 0.1f;
@@ -26,6 +31,8 @@ public class NearedOther : CreatureEvent
 		rightNearness = newRightNearness;
 		upNearness = newUpNearness;
 		downNearness = newDownNearness;
+
+        frequency = newFrequency;
 	}
 
 	void Update()
@@ -35,10 +42,23 @@ public class NearedOther : CreatureEvent
 				new Vector2 (gameObject.transform.position.x - leftNearness, gameObject.transform.position.y + upNearness),
 				new Vector2 (gameObject.transform.position.x + rightNearness, gameObject.transform.position.y - downNearness)
 			).Length > 1;
-			
+
+        float timePerTrigger = 1 / frequency;
+        
 		if (nearSomething)
 		{
-			Occured ();
+            occurences = occurences + Time.deltaTime / timePerTrigger;
 		}
-	}
+
+        while (occurences > 1)
+        {
+            occurences = occurences - 1;
+            Occured();
+        }
+    }
+
+    public override string GetEventName()
+    {
+        return "Near";
+    }
 }

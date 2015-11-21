@@ -1,17 +1,59 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CreatureEvent : MonoBehaviour
+public abstract class CreatureEvent : MonoBehaviour
 {
 
-	private CreatureCondition[] conditions;
-	private CreatureAction[] actions;
+	private int[] conditions;
+	private int[] actions;
 
-	public void Initialize(CreatureCondition[] eventConditions, CreatureAction[] eventActions)
+	public void Initialize(int[] eventConditions, int[] eventActions)
 	{
 		conditions = eventConditions;
 		actions = eventActions;
 	}
+
+    public abstract string GetEventName();
+
+    public Creature GetCreature()
+    {
+        return gameObject.GetComponent<Creature>();
+    }
+
+    public string GetDebugString()
+    {
+        string debugString = GetEventName() + ":";
+
+        foreach(int index in conditions)
+        {
+            debugString += index.ToString() + ", ";
+        }
+
+        debugString += "-> ";
+
+        foreach (int index in actions)
+        {
+            debugString += index.ToString() + ", ";
+        }
+
+        return debugString;
+    }
+
+    public void Rewire(int conditionCount, int actionCount)
+    {
+        bool rewireCondition = (Random.Range(0, 1f) > 0.5f);
+        if (rewireCondition && conditions.Length > 0)
+        {
+            int rewiredCondition = Random.Range(0, conditions.Length - 1);
+            conditions[rewiredCondition] = Random.Range(0, conditionCount - 1);
+        }
+        else
+        {
+            int rewiredAction = Random.Range(0, actions.Length - 1);
+            actions[rewiredAction] = Random.Range(0, actionCount - 1);
+        }
+
+    }
 
 	public void Occured()
 	{
@@ -19,8 +61,9 @@ public class CreatureEvent : MonoBehaviour
 
 		if (conditions != null)
 		{
-			foreach (CreatureCondition condition in conditions)
+			foreach (int conditionIndex in conditions)
 			{
+                CreatureCondition condition = GetCreature().GetKnownCondition(conditionIndex);
 				if (!condition.Satisfied())
 				{
 					allConditionsTrue = false;
@@ -31,8 +74,9 @@ public class CreatureEvent : MonoBehaviour
 
 		if (allConditionsTrue && actions != null)
 		{
-			foreach (CreatureAction action in actions)
+			foreach (int actionIndex in actions)
 			{
+                CreatureAction action = GetCreature().GetKnownAction(actionIndex);
 				action.Do();
 			}
 		}

@@ -28,4 +28,9 @@ public class HealthReached : CreatureEvent
 		if (crossedThreshold)
 			Occured ();
 	}
+
+    public override string GetEventName()
+    {
+        return "Health";
+    }
 }
