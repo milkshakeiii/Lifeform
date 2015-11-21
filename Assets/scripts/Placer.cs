@@ -72,7 +72,7 @@ public class Placer : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Escape))
 		    StopPlacement();
 
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetMouseButtonDown(0) && placeMe != null)
 		{
 			PlacementClick();
 		}

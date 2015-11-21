@@ -16,16 +16,20 @@ public class CreatureEvent : MonoBehaviour
 	public void Occured()
 	{
 		bool allConditionsTrue = true;
-		foreach (CreatureCondition condition in conditions)
+
+		if (conditions != null)
 		{
-			if (!condition.Satisfied())
+			foreach (CreatureCondition condition in conditions)
 			{
-				allConditionsTrue = false;
-				break;
+				if (!condition.Satisfied())
+				{
+					allConditionsTrue = false;
+					break;
+				}
 			}
 		}
 
-		if (allConditionsTrue)
+		if (allConditionsTrue && actions != null)
 		{
 			foreach (CreatureAction action in actions)
 			{

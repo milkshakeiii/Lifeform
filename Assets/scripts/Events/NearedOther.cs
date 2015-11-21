@@ -3,17 +3,42 @@ using System.Collections;
 
 public class NearedOther : CreatureEvent
 {
+	private float leftNearness;
+	private float rightNearness;
+	private float upNearness;
+	private float downNearness;
 
-	private float nearness;
-
-	public void InitializeNearedOther(float newNearness)
+	public void InitializeNearedOther(float newLeftNearness,
+	                                  float newRightNearness,
+	                                  float newUpNearness,
+	                                  float newDownNearness)
 	{
-		nearness = newNearness;
+		if (newDownNearness == 0f)
+			newDownNearness = 0.1f;
+		if (newRightNearness == 0f)
+			newRightNearness = 0.1f;
+		if (newUpNearness == 0f)
+			newUpNearness = 0.1f;
+		if (newLeftNearness == 0f)
+			newLeftNearness = 0.1f;
+
+		leftNearness = newLeftNearness;
+		rightNearness = newRightNearness;
+		upNearness = newUpNearness;
+		downNearness = newDownNearness;
 	}
 
 	void Update()
 	{
-		if (Physics2D.OverlapCircleAll(gameObject.transform.position, nearness).Length > 1)
+		bool nearSomething = 
+			Physics2D.OverlapAreaAll (
+				new Vector2 (gameObject.transform.position.x - leftNearness, gameObject.transform.position.y + upNearness),
+				new Vector2 (gameObject.transform.position.x + rightNearness, gameObject.transform.position.y - downNearness)
+			).Length > 1;
+			
+		if (nearSomething)
+		{
 			Occured ();
+		}
 	}
 }
