@@ -14,7 +14,7 @@ public class Creature : MonoBehaviour
 
     private List<CreatureCondition> knownConditions = new List<CreatureCondition>();
     private List<CreatureAction> knownActions = new List<CreatureAction>();
-
+	private int generation;
 
 	public string GetName()
 	{
@@ -45,6 +45,11 @@ public class Creature : MonoBehaviour
 		return (gameObject.transform.localScale.x +
 				gameObject.transform.localScale.y +
 				gameObject.transform.localScale.z) / 3f;
+	}
+
+	public int GetGeneration()
+	{
+		return generation;
 	}
 
     public CreatureAction GetKnownAction(int index)
@@ -162,37 +167,50 @@ public class Creature : MonoBehaviour
 
 
 
+	private void AddTestEvents()
+	{
+		AddKnownCondition(new NearLayer("Terrain", 4.1f, this));
+		AddKnownCondition(new NearTag("blue", 4.1f, this));
+		AddKnownCondition(new Cooldown(2f, this));
+		AddKnownCondition(new NearTag("green", 4.1f, this));
+		
+		AddKnownAction(new Jump(new Vector2(0f, 300f), 0.1f, this));
+		AddKnownAction(new Jump(new Vector2(0f, 1000f), 0.1f, this));
+		AddKnownAction(new Reproduce(new Vector2(0f, 12f), 0.5f, 0.1f, this));
+		AddKnownAction(new Graze(new Vector2(0f, -4.1f), 0.002f, 0.001f, "green", this));
+		
+		AddNearedOtherEvent(4.1f, 0f, 0f, 0f,
+		                    new int[] {0, 1, 2},
+		new int[] { 0 });
+		
+		AddHealthReachedEvent (0.15f, false,
+		                       new int[0],
+		                       new int[] {1});
+		
+		AddHealthReachedEvent (1f, true,
+		                       new int[0],
+		                       new int[] {2});
+		
+		AddNearedOtherEvent (0f, 0f, 0f, 4.1f,
+		                     new int[] { 3 },
+		new int[] { 3 });
+	}
 
+	private void Randomize()
+	{
 
+	}
 
     // Use this for initialization
     void Start ()
 	{
-        AddKnownCondition(new NearLayer("Terrain", 4.1f, this));
-        AddKnownCondition(new NearTag("blue", 4.1f, this));
-		AddKnownCondition(new Cooldown(2f, this));
-        AddKnownCondition(new NearTag("green", 4.1f, this));
-
-        AddKnownAction(new Jump(new Vector2(0f, 300f), 0.1f, this));
-        AddKnownAction(new Jump(new Vector2(0f, 1000f), 0.1f, this));
-        AddKnownAction(new Reproduce(new Vector2(0f, 12f), 0.5f, 0.1f, this));
-        AddKnownAction(new Graze(new Vector2(0f, -4.1f), 0.002f, 0.001f, "green", this));
-
-        AddNearedOtherEvent(4.1f, 0f, 0f, 0f,
-			                new int[] {0, 1, 2},
-			                new int[] { 0 });
-
-		AddHealthReachedEvent (0.15f, false,
-							   new int[0],
-		                       new int[] {1});
-
-		AddHealthReachedEvent (1f, true,
-		                       new int[0],
-		                       new int[] {2});
-
-		AddNearedOtherEvent (0f, 0f, 0f, 4.1f,
-		                     new int[] { 3 },
-							 new int[] { 3 });
+		generation = generation + 1;
+		if (generation == 1)
+		{
+			Randomize();
+			AddTestEvents();
+		}
+		Debug.Log (generation);
 
         Mutate();
     }
