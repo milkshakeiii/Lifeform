@@ -5,6 +5,7 @@ public class Placer : MonoBehaviour
 {
 	//round to the nearest multiple of roundingFactor when placing
 	public float roundingFactor = 1f;
+    public bool snap = true;
 
 	private GameObject placeMe = null;
 
@@ -39,14 +40,19 @@ public class Placer : MonoBehaviour
 		                                          Round (mousePosition.z));
 
 		//do not place if there is something there
-		if (Physics2D.OverlapPointAll (nearestRoundVector).Length != 1)
+		if (snap && Physics2D.OverlapPointAll (nearestRoundVector).Length != 1)
 			return;
 
 		//make placement
-		GameObject placedObject = Instantiate (placeMe,
-		                                       nearestRoundVector,
-		                                       new Quaternion (0f, 0f, 0f, 0f)) as GameObject;
-	}
+        if (snap)
+		    Instantiate (placeMe,
+		                 nearestRoundVector,
+		                 new Quaternion (0f, 0f, 0f, 0f));
+        else
+            Instantiate(placeMe,
+                        mousePosition,
+                        new Quaternion(0f, 0f, 0f, 0f));
+    }
 
 	private float Round(float roundMe)
 	{
