@@ -53,7 +53,7 @@ How to build and run from source on windows
 --------------------------------
 (As of 9/28/2017)
 
-Acquire the following dependencies:
+Acquire the following dependencies
 	S3_CPP master branch,
 	SYS3 master branch, 
 	Visual Studio 2015 (from microsoft),
@@ -63,7 +63,7 @@ Acquire the following dependencies:
 	Miniconda for python 2.7 and add Scripts directory to path (https://conda.io/miniconda.html)
 
 
-Follow these steps in a console:
+Follow these steps in a console
 	go to SYS3 root directory
 	conda env create --file=conda_env.yaml -n ramulator
  		create a conda environment from the conda_env.yaml file and name it ramulator
