@@ -1,2 +1,0 @@
-# Lifeform
-# The idea here is for a side-on view simulation game.  Lifeforms take the form of box-shaped objects.  They have different movement methods, senses, and sustenance sources.  There are three kinds of terrain: green, brown, and blue.  Bigger lifeforms can eat smaller lifeforms, or if a lifeform is small enough it can take a bite out of a bigger lifeform without killing it.  Once lifeforms reach a certain energy level they can reproduce.  Lifeforms have behaviors which take the form of event condition? action.  Lifeforms offspring are slightly mutated.
