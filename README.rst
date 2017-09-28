@@ -64,7 +64,6 @@ Acquire the following dependencies:
 
 
 Follow these steps in a console:
-.. code-block:: none
 	0.  go to SYS3 root directory
 	1.  conda env create --file=conda_env.yaml -n ramulator
 		-> create a conda environment from the conda_env.yaml file and name it ramulator
