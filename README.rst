@@ -64,23 +64,23 @@ Acquire the following dependencies:
 
 
 Follow these steps in a console:
-|0. go to SYS3 root directory
-|1. conda env create --file=conda_env.yaml -n ramulator
-|	-> create a conda environment from the conda_env.yaml file and name it ramulator
-|2. activate ramulator
-|	-> activate the conda enviroment
-|3. conda install swig
-|4. conda install cmake
-|5. go to S3_CPP root directory
-|6. python cmake.py -ac
-|	-> build the C++ portion of ramulator.
-|	-> -ac ensures that everything is built and old builds are deleted.
-|7. pip install git+https://github.com/pennmem/bptools.git
-|	-> install the bp tools library from our github
-|8. go back to SYS3 directory
-|9. python ramulator_main.py
-|	-> execute ramulator.
-|	-> at this point you should be able to successfully load configuration files.
+0. go to SYS3 root directory
+1. conda env create --file=conda_env.yaml -n ramulator
+	-> create a conda environment from the conda_env.yaml file and name it ramulator
+2. activate ramulator
+	-> activate the conda enviroment
+3. conda install swig
+4. conda install cmake
+5. go to S3_CPP root directory
+6. python cmake.py -ac
+	-> build the C++ portion of ramulator.
+	-> -ac ensures that everything is built and old builds are deleted.
+7. pip install git+https://github.com/pennmem/bptools.git
+	-> install the bp tools library from our github
+8. go back to SYS3 directory
+9. python ramulator_main.py
+	-> execute ramulator.
+	-> at this point you should be able to successfully load configuration files.
 
 
 Deployment
