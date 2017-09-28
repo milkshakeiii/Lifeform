@@ -50,7 +50,7 @@ Alternatively, to *only* run these tests::
 
 
 How to build and run from source on windows
---------------------------------
+-------------------------------------------
 (As of 9/28/2017)
 
 Acquire the following dependencies
@@ -84,6 +84,6 @@ Follow these steps in a console
 
 
 Deployment
-^^^^^^^^^^
+----------
 
 See the README in the ``installer`` directory.
